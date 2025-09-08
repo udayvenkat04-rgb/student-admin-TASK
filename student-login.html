@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Student Login</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <h2>Student Login</h2>
+        <div id="errorMsg" class="error"></div>
+        <input type="text" id="studentName" placeholder="Enter your name" />
+        <input type="password" id="studentPassword" placeholder="Enter password" />
+        <div class="buttons">
+            <button onclick="handleLogin()">Login</button>
+            <button onclick="location.href='student-signup.html'">Signup</button>
+            <button onclick="location.href='index.html'">Back</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function handleLogin() {
+            const name = document.getElementById('studentName').value.trim();
+            const password = document.getElementById('studentPassword').value.trim();
+            const errorMsg = document.getElementById('errorMsg');
+            errorMsg.textContent = '';
+
+            if (!name || !password) {
+                errorMsg.textContent = 'All fields are required.';
+                return;
+            }
+            if (studentLogin(name, password)) {
+                location.href = 'student.html';
+            } else {
+                errorMsg.textContent = 'Invalid name or password.';
+            }
+        }
+    </script>
+</body>
+</html>

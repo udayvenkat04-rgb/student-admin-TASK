@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="dashboard">
+        <h2 id="welcomeMessage">Student Dashboard</h2>
+        
+        <div>
+            <h3>Announcements</h3>
+            <ul id="announcementList"></ul>
+        </div>
+
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function logout() {
+            localStorage.removeItem('currentStudent');
+            location.href = 'index.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const student = localStorage.getItem('currentStudent');
+            if (!student) {
+                alert("Please login first.");
+                location.href = 'student-login.html';
+                return;
+            }
+            document.getElementById('welcomeMessage').textContent = `Welcome, ${student}`;
+            displayAnnouncementsForStudent();
+        });
+    </script>
+</body>
+</html>

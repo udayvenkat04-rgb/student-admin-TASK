@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Student Signup</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <h2>Student Signup</h2>
+        <div id="errorMsg" class="error"></div>
+        <input type="text" id="signupName" placeholder="Enter your name" />
+        <input type="password" id="signupPassword" placeholder="Enter password" />
+        <input type="password" id="signupConfirm" placeholder="Confirm password" />
+        <div class="buttons">
+            <button onclick="handleSignup()">Signup</button>
+            <button onclick="location.href='index.html'">Back</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function handleSignup() {
+            const name = document.getElementById('signupName').value.trim();
+            const password = document.getElementById('signupPassword').value.trim();
+            const confirm = document.getElementById('signupConfirm').value.trim();
+            const errorMsg = document.getElementById('errorMsg');
+            errorMsg.textContent = '';
+
+            if (!name || !password || !confirm) {
+                errorMsg.textContent = 'All fields are required.';
+                return;
+            }
+            if (password !== confirm) {
+                errorMsg.textContent = 'Passwords do not match.';
+                return;
+            }
+            if (studentSignup(name, password)) {
+                location.href = 'student-login.html';
+            }
+        }
+    </script>
+</body>
+</html>

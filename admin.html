@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="dashboard">
+        <h2>Admin Dashboard</h2>
+        
+        <div>
+            <h3>Add Announcement</h3>
+            <input type="text" id="announcementInput" placeholder="Enter announcement" />
+            <button onclick="addAnnouncement()">Add Announcement</button>
+        </div>
+
+        <div>
+            <h3>All Announcements</h3>
+            <ul id="announcementList"></ul>
+        </div>
+
+        <div>
+            <h3>Student Statistics</h3>
+            <p>Total Students: <span id="studentCount">0</span></p>
+        </div>
+
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        function logout() {
+            localStorage.removeItem('isAdminLoggedIn');
+            location.href = 'index.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const isAdminLoggedIn = localStorage.getItem('isAdminLoggedIn');
+            if (!isAdminLoggedIn || isAdminLoggedIn !== 'true') {
+                alert('Please login as admin first.');
+                location.href = 'admin-login.html';
+                return;
+            }
+            displayAnnouncements();
+            displayStudentCount();
+        });
+    </script>
+</body>
+</html>
